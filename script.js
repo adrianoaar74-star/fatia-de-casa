@@ -12,6 +12,42 @@ const products = [
 ];
 const grid = document.getElementById('productGrid');
 grid.innerHTML = products.map(p => `<article class="product-card"><div class="product-photo" style="background-image:url('${p.img}')"></div><div class="product-info"><div class="product-top"><h3>${p.name}</h3><span class="price">${p.price}</span></div><p>${p.desc}</p><a class="mini-btn" target="_blank" rel="noreferrer" href="https://wa.me/5511999999999?text=${encodeURIComponent('Olá! Quero saber mais sobre o bolo '+p.name+'.')}">Quero esse →</a></div></article>`).join('');
-const menuBtn=document.querySelector('.menu-btn'); const nav=document.querySelector('.nav');
+
+const nav=document.querySelector('.nav');
+const materialsLink=document.createElement('a');
+materialsLink.href='#materiais';
+materialsLink.textContent='Cardápio PDF';
+nav.insertBefore(materialsLink, nav.querySelector('.nav-cta'));
+
+const cta=document.querySelector('.cta-band');
+const materials=document.createElement('section');
+materials.className='section alt';
+materials.id='materiais';
+materials.innerHTML=`
+  <div class="section-heading">
+    <div><span class="eyebrow dark">Materiais</span><h2>Cardápio e plano de vendas</h2></div>
+    <p>Arquivos em PDF para apresentar os bolos, consultar preços aproximados e organizar os primeiros passos de divulgação.</p>
+  </div>
+  <div class="product-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px">
+    <article class="product-card">
+      <div style="padding:34px 24px 6px;font-size:46px">📋</div>
+      <div class="product-info">
+        <div class="product-top"><h3>Cardápio Fatia de Casa</h3><span class="price">PDF</span></div>
+        <p>Tamanhos pequeno, médio e grande, sabores e preços aproximados para envio pelo WhatsApp.</p>
+        <a class="mini-btn" href="materiais/cardapio-fatia-de-casa.pdf" target="_blank" rel="noreferrer">Abrir cardápio →</a>
+      </div>
+    </article>
+    <article class="product-card">
+      <div style="padding:34px 24px 6px;font-size:46px">📈</div>
+      <div class="product-info">
+        <div class="product-top"><h3>Plano de vendas — 14 dias</h3><span class="price">PDF</span></div>
+        <p>Estratégia prática para buscar os primeiros 10 clientes usando site, WhatsApp, indicação e parcerias locais.</p>
+        <a class="mini-btn" href="materiais/plano-vendas-14-dias.pdf" target="_blank" rel="noreferrer">Abrir plano →</a>
+      </div>
+    </article>
+  </div>`;
+cta.parentNode.insertBefore(materials,cta);
+
+const menuBtn=document.querySelector('.menu-btn');
 menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open);});
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
